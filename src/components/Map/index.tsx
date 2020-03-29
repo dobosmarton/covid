@@ -7,8 +7,7 @@ import Legend from "./legend";
 import Tooltip from "./tooltip";
 import Switcher from "../switcher";
 
-const MAPBOX_TOKEN =
-  "pk.eyJ1IjoibWFydG9uZG9ib3MiLCJhIjoiY2s4YWFnZzV1MDBlOTNrbzM3M25iYmQ5MiJ9.Ed3HkwlxhYkvMTzN1zjXUw";
+const MAPBOX_TOKEN = "";
 
 type ViewPort = {
   latitude?: number;

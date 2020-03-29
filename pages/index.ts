@@ -1,5 +1,3 @@
-import Home, { getServerSideProps } from "../src/screens/Home/";
-
-export { getServerSideProps };
+import Home from "../src/screens/Home/";
 
 export default Home;
