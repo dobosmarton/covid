@@ -1,9 +1,9 @@
-import Query from "./Query";
-import Result from "./Result";
+import Query from './Query';
+import Result from './Result';
 
 const resolvers = {
   Query,
-  Result
+  Result,
 };
 
 export default resolvers;

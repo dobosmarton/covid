@@ -9,19 +9,27 @@ export interface DataPoint {
   growthRate?: number;
 }
 
+export interface CountriesData {
+  countries: Country[];
+}
+
+export interface CountriesVars {
+  names: string[];
+}
+
 export interface TimeSeriesData {
-  results: DataPoint[];
+  result: DataPoint[];
 }
 
 export interface TimeSeriesVars {
-  countries: string[];
+  country: string;
   date: string;
 }
 
 export type MapDataPoint = {
   country: string;
-  latitude: float;
-  longitude: float;
+  latitude: number;
+  longitude: number;
   name: string;
 };
 

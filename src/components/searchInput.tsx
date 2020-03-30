@@ -1,7 +1,7 @@
-import { useContext, useRef, useEffect } from "react";
-import styled from "styled-components";
-import { IoIosSearch, IoIosClose } from "react-icons/io";
-import { SearchContext } from "../context/SearchContext";
+import { useContext, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import { IoIosSearch, IoIosClose } from 'react-icons/io';
+import { SearchContext } from '../context/SearchContext';
 
 const InputContainer = styled.div`
   border: ${({ theme: { colors } }) => `1px solid ${colors.lightGrey}`};
@@ -25,7 +25,7 @@ const ClickableIcon = styled(IoIosClose)`
   }
 `;
 
-export default ({}) => {
+export default () => {
   const { searchText, setSearchText, clearText } = useContext(SearchContext);
   const inputRef = useRef(null);
 
@@ -36,7 +36,7 @@ export default ({}) => {
   }, []);
 
   const onClear = () => {
-    inputRef.current.value = "";
+    inputRef.current.value = '';
     clearText();
   };
 

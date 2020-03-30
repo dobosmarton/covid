@@ -1,5 +1,5 @@
-import { range } from "d3-array";
-import { scaleQuantile } from "d3-scale";
+import { range } from 'd3-array';
+import { scaleQuantile } from 'd3-scale';
 
 export const getCountryNames = featureCollection => {
   const { features } = featureCollection;
@@ -11,16 +11,12 @@ export const convertCountryArrayToObject = (array, key) => {
   return array.reduce((obj, item) => {
     return {
       ...obj,
-      [item[key]]: { ...item.mostRecent, ...item.mapData }
+      [item[key]]: { ...item.mostRecent, ...item.mapData },
     };
   }, initialValue);
 };
 
-export const updatePercentiles = (
-  featureCollection,
-  accessor,
-  filter = "confirmed"
-) => {
+export const updatePercentiles = (featureCollection, accessor, filter = 'confirmed') => {
   const { features } = featureCollection;
 
   const mappedItems = features
@@ -33,7 +29,7 @@ export const updatePercentiles = (
     .range(range(8));
 
   return {
-    type: "FeatureCollection",
+    type: 'FeatureCollection',
     quantiles: scale.quantiles(),
     features: features.map(f => {
       const value = accessor(f);
@@ -42,9 +38,9 @@ export const updatePercentiles = (
         ...f.properties,
         ...value,
         value: value?.[filter],
-        percentile: scale(value?.[filter])
+        percentile: scale(value?.[filter]),
       };
       return { ...f, properties };
-    })
+    }),
   };
 };

@@ -1,7 +1,4 @@
-import { ApolloError } from "apollo-server-micro";
-
-const formatDate = (d: Date) =>
-  `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+const formatDate = (d: Date) => `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
 
 const getGrowthRate = (index: number, results: any) => {
   if (index === 0) {
@@ -12,9 +9,7 @@ const getGrowthRate = (index: number, results: any) => {
   if (!prevResult || prevResult.confirmed === 0) {
     return undefined;
   }
-  return (
-    (currentResult.confirmed - prevResult.confirmed) / prevResult.confirmed
-  );
+  return (currentResult.confirmed - prevResult.confirmed) / prevResult.confirmed;
 };
 
 const resolvers = {
@@ -25,25 +20,18 @@ const resolvers = {
     const withCountryName = countryResults.map((result, index) => ({
       ...result,
       growthRate: getGrowthRate(index, countryResults),
-      country: { name: country }
+      country: { name: country },
     }));
 
     if (date) {
       const eq = date && date.eq ? formatDate(new Date(date.eq)) : null;
-      const lt =
-        date && date.lt ? new Date(formatDate(new Date(date.lt))) : null;
-      const gt =
-        date && date.gt ? new Date(formatDate(new Date(date.gt))) : null;
+      const lt = date && date.lt ? new Date(formatDate(new Date(date.lt))) : null;
+      const gt = date && date.gt ? new Date(formatDate(new Date(date.gt))) : null;
 
       return withCountryName.filter(result => {
         const d = new Date(result.date);
 
-        return (
-          (eq && formatDate(d) === eq) ||
-          (lt && d < lt) ||
-          (gt && d > gt) ||
-          !date
-        );
+        return (eq && formatDate(d) === eq) || (lt && d < lt) || (gt && d > gt) || !date;
       });
     }
     return withCountryName;
@@ -53,10 +41,7 @@ const resolvers = {
     const results = await getTimeseries();
     const countryMapData = await getCountryData();
 
-    let formatted = (names && names.length > 0
-      ? names
-      : Object.keys(results)
-    ).reduce((acc, countryName) => {
+    const formatted = (names && names.length > 0 ? names : Object.keys(results)).reduce((acc, countryName) => {
       const countryResults = results[countryName] as any[];
       if (!countryResults) {
         // throw new ApolloError(`Couldn't find data from country ${countryName}`);
@@ -65,7 +50,7 @@ const resolvers = {
 
       const updatedResults = countryResults.map((result, index) => ({
         ...result,
-        growthRate: getGrowthRate(index, countryResults)
+        growthRate: getGrowthRate(index, countryResults),
       }));
       const mostRecentIndex = countryResults.length - 1;
       const mostRecent = countryResults[mostRecentIndex];
@@ -74,12 +59,12 @@ const resolvers = {
         name: countryName,
         results: updatedResults,
         mapData: countryMapData.find(point => point.name === countryName),
-        mostRecent
+        mostRecent,
       };
       return [...acc, country];
     }, []);
     return formatted;
-  }
+  },
 };
 
 export default resolvers;

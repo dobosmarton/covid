@@ -1,3 +1,3 @@
-import Info from "../src/screens/Info";
+import Info from '../src/screens/Info';
 
 export default Info;

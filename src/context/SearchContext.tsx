@@ -1,19 +1,20 @@
-import React, { createContext, useState, useCallback } from "react";
-import debounce from "../utils/debounce";
+import React, { createContext, useState, useCallback } from 'react';
+import debounce from '../utils/debounce';
 
 interface ContextProps {
-  readonly loading: boolean;
-  readonly error: string | null;
-  readonly setActiveFilter: (value: string) => void;
+  readonly searchText: string;
+  readonly setSearchText: (event?: React.ChangeEvent<HTMLInputElement>) => void;
+  readonly clearText: () => void;
 }
 
 export const SearchContext = createContext<ContextProps>({
-  searchText: "",
-  setSearchText: () => ({})
+  searchText: '',
+  setSearchText: () => ({}),
+  clearText: () => ({}),
 });
 
 export const SearchProvider: React.FC<{}> = ({ children }) => {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
 
   const debounceCallback = useCallback(
     debounce(value => {
@@ -24,12 +25,10 @@ export const SearchProvider: React.FC<{}> = ({ children }) => {
 
   const setText = ({ target: { value } }) => debounceCallback(value);
 
-  const clearText = () => setSearchText("");
+  const clearText = () => setSearchText('');
 
   return (
-    <SearchContext.Provider
-      value={{ searchText, setSearchText: setText, clearText }}
-    >
+    <SearchContext.Provider value={{ searchText, setSearchText: setText, clearText }}>
       {children}
     </SearchContext.Provider>
   );

@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import Link from "next/link";
-import styled from "styled-components";
-import SearchInput from "./searchInput";
-import { Row } from "./Layout/row";
-import { initGA, logPageView } from "../utils/analytics";
+import { useEffect } from 'react';
+import Link from 'next/link';
+import styled from 'styled-components';
+import SearchInput from './searchInput';
+import { Row } from './Layout/row';
+import { initGA, logPageView } from '../utils/analytics';
 
 const Header = styled.div`
   position: absolute;
@@ -17,8 +17,7 @@ const Header = styled.div`
   z-index: 99;
   padding: 0 24px;
   background-color: ${({ theme: { colors } }) => colors.white};
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 `;
 
 const Title = styled.div<{}>`
@@ -40,6 +39,12 @@ const LinkText = styled.div`
 type Props = {
   withSearch: boolean;
 };
+
+declare global {
+  interface Window {
+    GA_INITIALIZED: boolean;
+  }
+}
 
 export default ({ withSearch = true }) => {
   useEffect(() => {

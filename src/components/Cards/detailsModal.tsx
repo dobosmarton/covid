@@ -1,34 +1,30 @@
-import { useRef } from "react";
-import Modal from "react-modal";
-import styled from "styled-components";
-import { IoIosClose } from "react-icons/io";
-import { useQuery } from "@apollo/client";
-import { format, subDays } from "date-fns";
+import { useRef } from 'react';
+import Modal from 'react-modal';
+import styled from 'styled-components';
+import { IoIosClose } from 'react-icons/io';
+import { useQuery } from '@apollo/client';
+import { format } from 'date-fns';
 
-import {
-  Country,
-  TimeSeriesData,
-  TimeSeriesVars
-} from "../../config/interfaces";
-import Card from "../Cards/card";
-import ComposedChart from "../Charts/composedChart";
-import { TIME_SERIE } from "../../graphql/queries";
+import { Country, TimeSeriesData, TimeSeriesVars } from '../../config/interfaces';
+import Card from './card';
+import ComposedChart from '../Charts/composedChart';
+import { TIME_SERIE } from '../../graphql/queries';
 
 const customStyles = {
   overlay: {
     zIndex: 100,
-    backgroundColor: "rgba(0,0,0,0.8)"
+    backgroundColor: 'rgba(0,0,0,0.8)',
   },
   content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    border: "none",
-    marginRight: "-50%",
-    backgroundColor: "transparent",
-    transform: "translate(-50%, -50%)"
-  }
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    border: 'none',
+    marginRight: '-50%',
+    backgroundColor: 'transparent',
+    transform: 'translate(-50%, -50%)',
+  },
 };
 
 const ClickableIcon = styled(IoIosClose)`
@@ -50,8 +46,7 @@ const Header = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
-  border-bottom: ${({ theme: { colors } }) =>
-    `1px solid ${colors.superLightGrey}`};
+  border-bottom: ${({ theme: { colors } }) => `1px solid ${colors.superLightGrey}`};
   padding-bottom: 12px;
   margin-bottom: 12px;
 `;
@@ -62,14 +57,11 @@ type Props = {
 };
 
 export default ({ data, onClose }: Props) => {
-  const date = useRef(format(new Date(), "MM/dd/yyyy")).current;
+  const date = useRef(format(new Date(), 'MM/dd/yyyy')).current;
 
-  const { loading, error, data: queryResult } = useQuery<
-    TimeSeriesData,
-    TimeSeriesVars
-  >(TIME_SERIE, {
+  const { data: queryResult } = useQuery<TimeSeriesData, TimeSeriesVars>(TIME_SERIE, {
     variables: { country: data?.name, date },
-    skip: !data
+    skip: !data,
   });
 
   return (

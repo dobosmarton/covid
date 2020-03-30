@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const TIME_SERIE = gql`
   query Result($country: String!, $date: String!) {

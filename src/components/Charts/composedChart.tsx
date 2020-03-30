@@ -1,49 +1,38 @@
-import { useMemo, useCallback } from "react";
-import {
-  ComposedChart,
-  Line,
-  Area,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  Scatter
-} from "recharts";
-import { withTheme } from "styled-components";
+import { useMemo, useCallback } from 'react';
+import { ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { withTheme } from 'styled-components';
 
 export default withTheme(({ theme, timeSeriesData }) => {
   const styles = useMemo(
     () => ({
       contentStyle: {
-        borderRadius: "6px",
-        borderColor: theme.colors.lightGrey
+        borderRadius: '6px',
+        borderColor: theme.colors.lightGrey,
       },
 
       labelStyle: {
-        fontWeight: "700",
-        fontSize: "0.8em",
-        paddingBottom: "4px",
-        marginBottom: "12px",
-        borderBottom: `1px solid ${theme.colors.superLightGrey}`
+        fontWeight: '700',
+        fontSize: '0.8em',
+        paddingBottom: '4px',
+        marginBottom: '12px',
+        borderBottom: `1px solid ${theme.colors.superLightGrey}`,
       },
 
       itemStyle: {
-        marginBottom: "0px",
-        marginTop: "0px"
-      }
+        marginBottom: '0px',
+        marginTop: '0px',
+      },
     }),
     [theme]
   );
 
   const parseDate = useCallback((date, itemNum = 3) => {
-    const splitted = date.split("-");
+    const splitted = date.split('-');
     if (splitted?.length >= itemNum) {
       return splitted
         .slice(splitted.length - itemNum)
         .reverse()
-        .join("/");
+        .join('/');
     }
     return date;
   }, []);
@@ -57,7 +46,7 @@ export default withTheme(({ theme, timeSeriesData }) => {
         top: 20,
         right: 20,
         bottom: 20,
-        left: 20
+        left: 20,
       }}
     >
       <CartesianGrid stroke="#f5f5f5" />
@@ -71,24 +60,9 @@ export default withTheme(({ theme, timeSeriesData }) => {
       />
       <Legend />
 
-      <Bar
-        dataKey="confirmed"
-        barSize={20}
-        stroke={theme.colors.blue}
-        fill={theme.colors.darkBlue}
-      />
-      <Area
-        type="monotone"
-        dataKey="recovered"
-        stroke={theme.colors.primary}
-        fill={theme.colors.primary}
-      />
-      <Line
-        type="monotone"
-        dataKey="deaths"
-        stroke={theme.colors.yellow}
-        dot={{ r: 2 }}
-      />
+      <Bar dataKey="confirmed" barSize={20} stroke={theme.colors.blue} fill={theme.colors.darkBlue} />
+      <Area type="monotone" dataKey="recovered" stroke={theme.colors.primary} fill={theme.colors.primary} />
+      <Line type="monotone" dataKey="deaths" stroke={theme.colors.yellow} dot={{ r: 2 }} />
     </ComposedChart>
   );
 });

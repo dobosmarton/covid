@@ -1,7 +1,7 @@
-import { useCallback } from "react";
-import styled from "styled-components";
-import Card from "../Cards/card";
-import { Row } from "../Layout/row";
+import { useCallback } from 'react';
+import styled from 'styled-components';
+import Card from '../Cards/card';
+import { Row } from '../Layout/row';
 
 const LegendPanel = styled(Card)`
   position: absolute;
@@ -22,21 +22,18 @@ const LegendDot = styled.div`
 `;
 
 type Props = {
-  stops: [any][];
+  stops: (string | number)[][];
   quantiles: number[] | null;
 };
 
-const getValue = value =>
-  value < 1
-    ? Math.round((value + Number.EPSILON) * 100) / 100
-    : Math.round(value);
+const getValue = (value) => (value < 1 ? Math.round((value + Number.EPSILON) * 100) / 100 : Math.round(value));
 
 export default ({ stops, quantiles }: Props) => {
   const getRange = useCallback(
-    index => {
+    (index) => {
       if (quantiles?.length > 0) {
         const floor = index > 0 ? getValue(quantiles[index - 1]) : 0;
-        const top = index < quantiles.length ? getValue(quantiles[index]) : "";
+        const top = index < quantiles.length ? getValue(quantiles[index]) : '';
         return `${floor} - ${top}`;
       }
       return null;

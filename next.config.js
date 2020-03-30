@@ -1,8 +1,8 @@
-import path from 'path';
+const path = require('path');
 
-import withPlugins from 'next-compose-plugins';
+const withPlugins = require('next-compose-plugins');
 
-import withCustomBabelConfig from 'next-plugin-custom-babel-config';
+const withCustomBabelConfig = require('next-plugin-custom-babel-config');
 
 const getEnvPath = () => {
   switch (process.env.ENV_VARS) {

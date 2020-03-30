@@ -1,13 +1,10 @@
-import { useMemo, useState, useEffect, useContext } from "react";
-import styled from "styled-components";
-import { IoIosGlobe } from "react-icons/io";
-import { Country } from "../../config/interfaces";
-import { CovidDataContext } from "../../context/CovidContext";
-import { SearchContext } from "../../context/SearchContext";
-import useFuzzySearch from "../../hooks/useFuzzySearch";
-import Card from "./card";
-import { dataLayer } from "../Map/mapStyle";
-import { Row } from "../Layout/row";
+import { useMemo } from 'react';
+import styled from 'styled-components';
+import { IoIosGlobe } from 'react-icons/io';
+import { Country } from '../../config/interfaces';
+import Card from './card';
+import { dataLayer } from '../Map/mapStyle';
+import { Row } from '../Layout/row';
 
 type Props = {
   activeFilter: string;
@@ -64,8 +61,7 @@ const Value = styled.span<{ isActive: boolean }>`
   font-size: ${({ isActive }) => (isActive ? 0.8 : 0.7)}em;
   font-weight: ${({ isActive }) => (isActive ? 700 : 400)};
   line-height: ${({ isActive }) => (isActive ? 1.8 : 1.6)}em;
-  color: ${({ theme: { colors }, isActive }) =>
-    isActive ? colors.primary : colors.grey};
+  color: ${({ theme: { colors }, isActive }) => (isActive ? colors.primary : colors.grey)};
 `;
 
 const Marker = styled.div`
@@ -89,46 +85,40 @@ const StyledRow = styled(Row)`
   justify-content: space-between;
 `;
 
-const getValue = value => {
-  if (value === undefined) return "No data available";
+const getValue = (value) => {
+  if (value === undefined) return 'No data available';
 
-  const formatted =
-    value < 1
-      ? Math.round((value + Number.EPSILON) * 100) / 100
-      : Math.round(value);
+  const formatted = value < 1 ? Math.round((value + Number.EPSILON) * 100) / 100 : Math.round(value);
 
   return new Intl.NumberFormat().format(formatted);
 };
 
-const options = ["confirmed", "deaths", "recovered", "growthRate"];
+const options = ['confirmed', 'deaths', 'recovered', 'growthRate'];
 
 export default ({ data, activeFilter, onCardClick, onGlobeClick }) => {
-  const actColor = useMemo(
-    () => dataLayer.paint["fill-color"].stops[data.percentile],
-    [data?.percentile]
-  );
+  const actColor = useMemo(() => dataLayer.paint['fill-color'].stops[data.percentile], [data?.percentile]);
 
-  const onGlobeIcon = e => {
+  const onGlobeIcon = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const { latitude, longitude } = data;
     onGlobeClick({ latitude, longitude });
   };
 
-  const onCard = e => {
+  const onCard = (e) => {
     e.preventDefault();
     onCardClick(data);
   };
 
   return (
     <CountryCard onClick={onCard}>
-      <Marker style={actColor ? { backgroundColor: actColor[1] } : {}} />
+      <Marker style={actColor ? { backgroundColor: actColor[1] as string } : {}} />
       <StyledRow>
         <Title>{data.name}</Title>
         <GlobeIcon onClick={onGlobeIcon} />
       </StyledRow>
       <Content>
-        {options.map(option => (
+        {options.map((option) => (
           <>
             <Label>{option}:</Label>
             <Value key={option} isActive={activeFilter === option}>

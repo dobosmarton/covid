@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import styled from "styled-components";
-import { CovidDataContext } from "../context/CovidContext";
+import { useContext } from 'react';
+import styled from 'styled-components';
+import { CovidDataContext } from '../context/CovidContext';
 
 const Switch = styled.div`
   position: absolute;
@@ -14,8 +14,7 @@ const Switch = styled.div`
   z-index: 99;
 
   background-color: ${({ theme: { colors } }) => colors.white};
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 `;
 
 const Option = styled.div<{ active: boolean }>`
@@ -25,11 +24,9 @@ const Option = styled.div<{ active: boolean }>`
   padding: 8px 8px;
   letter-spacing: 0.8px;
 
-  color: ${({ theme: { colors }, active }) =>
-    active ? colors.white : colors.grey};
+  color: ${({ theme: { colors }, active }) => (active ? colors.white : colors.grey)};
 
-  background-color: ${({ theme: { colors }, active }) =>
-    active ? colors.primary : "transparent"};
+  background-color: ${({ theme: { colors }, active }) => (active ? colors.primary : 'transparent')};
 
   &:hover {
     opacity: 0.8;
@@ -37,13 +34,13 @@ const Option = styled.div<{ active: boolean }>`
 `;
 
 const options = [
-  { key: "confirmed", value: "confirmed" },
-  { key: "deaths", value: "deaths" },
-  { key: "recovered", value: "recovered" },
-  { key: "growthRate", value: "growth rate" }
+  { key: 'confirmed', value: 'confirmed' },
+  { key: 'deaths', value: 'deaths' },
+  { key: 'recovered', value: 'recovered' },
+  { key: 'growthRate', value: 'growth rate' },
 ];
 
-export default ({}) => {
+export default () => {
   const { activeFilter, setActiveFilter } = useContext(CovidDataContext);
 
   const onOption = (e, option) => {
@@ -54,11 +51,7 @@ export default ({}) => {
   return (
     <Switch>
       {options.map(option => (
-        <Option
-          key={option.key}
-          active={activeFilter === option.key}
-          onClick={e => onOption(e, option)}
-        >
+        <Option key={option.key} active={activeFilter === option.key} onClick={e => onOption(e, option)}>
           {option.value}
         </Option>
       ))}

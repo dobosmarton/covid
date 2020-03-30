@@ -1,31 +1,26 @@
-import { useState, useEffect } from "react";
-
-import MapGL, { Source, Layer } from "react-map-gl";
-import { dataLayer } from "./mapStyle";
-import { updatePercentiles } from "../../utils/map";
-import Legend from "./legend";
-import Tooltip from "./tooltip";
-import Switcher from "../switcher";
+import MapGL, { Source, Layer } from 'react-map-gl';
+import { dataLayer } from './mapStyle';
+import Legend from './legend';
+import Switcher from '../switcher';
 
 type ViewPort = {
-  latitude?: number;
-  longitude?: number;
-  zoom?: number;
+  latitude: number;
+  longitude: number;
+  zoom: number;
   bearing?: number;
   pitch?: number;
 };
 
 type Props = {
-  t: (key: string) => void;
   viewport: ViewPort;
   sourceData: {
-    type: string;
-    features: Array<{}>;
+    features: any[];
+    quantiles?: number[];
   };
   onViewportChange: (viewport: ViewPort) => void;
 };
 
-const Map = ({ viewport, sourceData, onFly, onViewportChange }: Props) => {
+const Map = ({ viewport, sourceData, onViewportChange }: Props) => {
   return (
     <MapGL
       {...viewport}
@@ -39,10 +34,7 @@ const Map = ({ viewport, sourceData, onFly, onViewportChange }: Props) => {
         <Layer {...dataLayer} />
       </Source>
       <Switcher />
-      <Legend
-        quantiles={sourceData?.quantiles}
-        stops={dataLayer.paint["fill-color"].stops}
-      />
+      <Legend quantiles={sourceData?.quantiles} stops={dataLayer.paint['fill-color'].stops} />
     </MapGL>
   );
 };

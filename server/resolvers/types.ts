@@ -1,5 +1,3 @@
-import { GraphQLResolveInfo } from "graphql";
-
 export type MapDataPoint = {
   country: string;
   latitude: number;

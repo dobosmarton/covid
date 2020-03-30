@@ -1,4 +1,4 @@
-import server, { config } from "../../server/index";
+import server, { config } from '../../server/index';
 
 export { config };
 

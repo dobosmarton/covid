@@ -1,19 +1,22 @@
-import { useEffect, useCallback, useContext, useState, useMemo } from "react";
-import Fuse from "fuse.js";
-import { SearchContext } from "../context/SearchContext";
+import { useEffect, useContext, useState, useMemo } from 'react';
+import Fuse from 'fuse.js';
+import { SearchContext } from '../context/SearchContext';
 
 type Props = {
   array: any[];
   options?: {
-    key: string[];
+    keys: string[];
+    threshold?: number;
+    distance?: number;
+    minMatchCharLength?: number;
   };
 };
 
 const defaultOptions = {
-  keys: ["properties.name"],
+  keys: ['properties.name'],
   threshold: 0.2,
   distance: 20,
-  minMatchCharLength: 4
+  minMatchCharLength: 4,
 };
 
 export default ({ array, options = defaultOptions }: Props) => {

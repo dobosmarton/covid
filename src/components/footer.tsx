@@ -1,11 +1,10 @@
-import { useMemo, useState, useEffect, useCallback, useContext } from "react";
-import styled from "styled-components";
-import { Country } from "../config/interfaces";
-import { CovidDataContext } from "../context/CovidContext";
-import { SearchContext } from "../context/SearchContext";
-import useFuzzySearch from "../hooks/useFuzzySearch";
-import Card from "./Cards/countryCard";
-import DetailsModal from "./Cards/detailsModal";
+import { useMemo, useState, useEffect, useCallback, useContext } from 'react';
+import styled from 'styled-components';
+import { CovidDataContext } from '../context/CovidContext';
+import { SearchContext } from '../context/SearchContext';
+import useFuzzySearch from '../hooks/useFuzzySearch';
+import Card from './Cards/countryCard';
+import DetailsModal from './Cards/detailsModal';
 
 const Footer = styled.div`
   position: absolute;
@@ -35,21 +34,19 @@ export default ({ onViewportChange }: Props) => {
   useEffect(() => {
     if (sourceData?.features) {
       const sorted = sourceData.features
-        .filter(country => country.properties[activeFilter])
-        .sort(
-          (a, b) => b.properties[activeFilter] - a.properties[activeFilter]
-        );
+        .filter((country) => country.properties[activeFilter])
+        .sort((a, b) => b.properties[activeFilter] - a.properties[activeFilter]);
       setSortedData(sorted);
     }
   }, [sourceData?.features, activeFilter, searchText]);
 
-  const onCardClick = useCallback(data => {
+  const onCardClick = useCallback((data) => {
     setSelectedCountry(data);
   }, []);
 
   const cards = useMemo(
     () =>
-      filteredArray?.map(country => {
+      filteredArray?.map((country) => {
         return (
           <Card
             data={country.properties}
@@ -65,10 +62,7 @@ export default ({ onViewportChange }: Props) => {
   return (
     <Footer>
       {cards}
-      <DetailsModal
-        data={selectedCountry}
-        onClose={() => setSelectedCountry(null)}
-      />
+      <DetailsModal data={selectedCountry} onClose={() => setSelectedCountry(null)} />
     </Footer>
   );
 };
