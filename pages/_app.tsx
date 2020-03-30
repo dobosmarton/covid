@@ -2,6 +2,7 @@ import 'typeface-nunito-sans';
 
 import React from 'react';
 import NextApp from 'next/app';
+import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
 
@@ -22,6 +23,12 @@ export default class App extends NextApp {
 
     return (
       <>
+        <Head>
+          <link rel="icon" type="image/png" sizes="32x32" href="/static/virus-32.png" />
+          <title>Coronavirus data map</title>
+          <meta name="google" content="notranslate" />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+        </Head>
         <DefaultSeo {...SEO} />
         <ThemeProvider theme={theme}>
           <GlobalStyle />
