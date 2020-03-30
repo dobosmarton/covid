@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const TIME_SERIES = gql`
-  query Results($countries: [String!]!, $date: String!) {
-    results(countries: $countries, date: { lt: $date }) {
+export const TIME_SERIE = gql`
+  query Result($country: String!, $date: String!) {
+    result(country: $country, date: { lt: $date }) {
       country {
         name
       }

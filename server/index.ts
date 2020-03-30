@@ -1,8 +1,7 @@
 import { ApolloServer, makeExecutableSchema } from "apollo-server-micro";
 import getConfig from "next/config";
 import Cors from "micro-cors";
-import DataLoader from "dataloader";
-import fetch from "node-fetch";
+import fetch from "isomorphic-unfetch";
 import path from "path";
 import fs from "fs";
 import { default as typeDefs } from "./schema";
@@ -46,7 +45,6 @@ const apolloServer = new ApolloServer({
       }
 
       const contents = fs.readFileSync("jsoncontent.json");
-      // Define to JSON type
       countryShapes = JSON.parse(contents);
       return countryShapes;
     };

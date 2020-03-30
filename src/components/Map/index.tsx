@@ -7,8 +7,6 @@ import Legend from "./legend";
 import Tooltip from "./tooltip";
 import Switcher from "../switcher";
 
-const MAPBOX_TOKEN = "";
-
 type ViewPort = {
   latitude?: number;
   longitude?: number;
@@ -19,34 +17,23 @@ type ViewPort = {
 
 type Props = {
   t: (key: string) => void;
+  viewport: ViewPort;
   sourceData: {
     type: string;
     features: Array<{}>;
   };
   onViewportChange: (viewport: ViewPort) => void;
-} & ViewPort;
+};
 
-const Map = ({
-  latitude,
-  longitude,
-  zoom,
-  bearing,
-  pitch,
-  sourceData,
-  onViewportChange
-}: Props) => {
+const Map = ({ viewport, sourceData, onFly, onViewportChange }: Props) => {
   return (
     <MapGL
-      latitude={latitude}
-      longitude={longitude}
-      zoom={zoom}
-      bearing={bearing}
-      pitch={pitch}
+      {...viewport}
       width="100vw"
       height="100vh"
       mapStyle="mapbox://styles/mapbox/light-v10"
       onViewportChange={onViewportChange}
-      mapboxApiAccessToken={MAPBOX_TOKEN}
+      mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
     >
       <Source type="geojson" data={sourceData}>
         <Layer {...dataLayer} />

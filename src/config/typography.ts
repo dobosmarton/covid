@@ -5,7 +5,6 @@ const typography = new Typography({
   bodyFontFamily: ["Nunito Sans", "sans-serif"]
 });
 
-// Insert styles directly into the <head>
 typography.injectStyles();
 
 export default typography;

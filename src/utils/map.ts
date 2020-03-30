@@ -11,7 +11,7 @@ export const convertCountryArrayToObject = (array, key) => {
   return array.reduce((obj, item) => {
     return {
       ...obj,
-      [item[key]]: item.mostRecent
+      [item[key]]: { ...item.mostRecent, ...item.mapData }
     };
   }, initialValue);
 };
@@ -22,9 +22,15 @@ export const updatePercentiles = (
   filter = "confirmed"
 ) => {
   const { features } = featureCollection;
+
+  const mappedItems = features
+    .map(accessor)
+    .map(item => item?.[filter])
+    .filter(item => item);
+
   const scale = scaleQuantile()
-    .domain(features.map(accessor).map(item => item?.[filter]))
-    .range(range(12));
+    .domain(mappedItems)
+    .range(range(8));
 
   return {
     type: "FeatureCollection",

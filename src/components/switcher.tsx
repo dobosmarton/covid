@@ -23,6 +23,7 @@ const Option = styled.div<{ active: boolean }>`
   font-weight: 600;
   cursor: pointer;
   padding: 8px 8px;
+  letter-spacing: 0.8px;
 
   color: ${({ theme: { colors }, active }) =>
     active ? colors.white : colors.grey};

@@ -18,31 +18,26 @@ const getGrowthRate = (index: number, results: any) => {
 };
 
 const resolvers = {
-  async results(_parent, { countries, date }, { getTimeseries }) {
+  async result(_parent, { country, date }, { getTimeseries }) {
     const results = await getTimeseries();
-    const eq = date && date.eq ? formatDate(new Date(date.eq)) : null;
-    const lt = date && date.lt ? new Date(formatDate(new Date(date.lt))) : null;
-    const gt = date && date.gt ? new Date(formatDate(new Date(date.gt))) : null;
+    const countryResults = results[country];
 
-    const countryNames =
-      countries && countries.length > 0 ? countries : Object.keys(results);
-    let formatted = countryNames
-      .reduce((acc, countryName) => {
-        const countryResults = results[countryName];
-        if (!countryResults) {
-          throw new ApolloError(
-            `Couldn't find data from country ${countryName}`
-          );
-        }
-        const withCountryName = countryResults.map((result, index) => ({
-          ...result,
-          growthRate: getGrowthRate(index, countryResults),
-          country: { name: countryName }
-        }));
-        return [...acc, ...withCountryName];
-      }, [])
-      .filter(result => {
+    const withCountryName = countryResults.map((result, index) => ({
+      ...result,
+      growthRate: getGrowthRate(index, countryResults),
+      country: { name: country }
+    }));
+
+    if (date) {
+      const eq = date && date.eq ? formatDate(new Date(date.eq)) : null;
+      const lt =
+        date && date.lt ? new Date(formatDate(new Date(date.lt))) : null;
+      const gt =
+        date && date.gt ? new Date(formatDate(new Date(date.gt))) : null;
+
+      return withCountryName.filter(result => {
         const d = new Date(result.date);
+
         return (
           (eq && formatDate(d) === eq) ||
           (lt && d < lt) ||
@@ -50,28 +45,8 @@ const resolvers = {
           !date
         );
       });
-    return formatted;
-  },
-  async result(_parent, { country, date }, { getTimeseries }) {
-    const results = await getTimeseries();
-    const countryResult = results[country];
-    if (date) {
-      const formattedDate = formatDate(new Date(date));
-      const foundIndex = countryResult.findIndex(r => {
-        const d = formatDate(new Date(r.date));
-        return d === formattedDate;
-      });
-      const found = countryResult[foundIndex];
-      found.country = country;
-      found.growthRate = getGrowthRate(foundIndex, countryResult);
-      return found;
     }
-    // if no date provided, return the most recent.
-    const lastIndex = countryResult.length - 1;
-    const found = countryResult[lastIndex];
-    found.growthRate = getGrowthRate(lastIndex, countryResult);
-    found.country = { name: country };
-    return found;
+    return withCountryName;
   },
 
   async countries(_parent, { names }, { getTimeseries, getCountryData }) {
@@ -104,25 +79,6 @@ const resolvers = {
       return [...acc, country];
     }, []);
     return formatted;
-  },
-  async country(_parent, { name }, { getTimeseries, getCountryData }) {
-    const data = await getTimeseries();
-    const countryMapData = await getCountryData();
-    let results = data[name];
-    if (!results) {
-      throw new ApolloError(`Couldn't find data from country ${name}`);
-    }
-    results = results.map((result, index) => ({
-      ...result,
-      growthRate: getGrowthRate(index, results)
-    }));
-    const country = {
-      name,
-      results,
-      mapData: countryMapData.find(point => point.name === countryName),
-      mostRecent: results[results.length - 1]
-    };
-    return country;
   }
 };
 

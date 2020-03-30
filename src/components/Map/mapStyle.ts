@@ -7,16 +7,12 @@ export const dataLayer = {
       property: "percentile",
       stops: [
         "#00429d",
-        "#3761ab",
-        "#5681b9",
+        "#4771b2",
         "#73a2c6",
-        "#93c4d2",
-        "#b9e5dd",
-        "#ffd3bf",
-        "#ffa59e",
+        "#a5d5d8",
+        "#ffbcaf",
         "#f4777f",
-        "#dd4c65",
-        "#be214d",
+        "#cf3759",
         "#93003a"
       ].map((color, index) => [index, color])
     },

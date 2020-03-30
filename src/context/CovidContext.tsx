@@ -15,10 +15,7 @@ import {
 } from "../utils/map";
 
 import { Country, TimeSeriesData, TimeSeriesVars } from "../config/interfaces";
-import { TIME_SERIES, COUNTRIES } from "../graphql/queries";
-import { Book, UserSubject } from "../interfaces";
-import { useAuth } from "./AuthProvider";
-import { firestore } from "../configs/firebase";
+import { COUNTRIES } from "../graphql/queries";
 
 interface ContextProps {
   readonly loading: boolean;
@@ -41,8 +38,6 @@ export const CovidDataProvider: React.FC<{}> = ({ children }) => {
   const dataJSON = useRef(require("../../assets/country_layout")).current;
   const countries = useMemo(() => getCountryNames(dataJSON), [dataJSON]);
 
-  // const date = useRef(format(subDays(new Date(), 1), "dd/MM/yyyy")).current;
-
   const { loading, error, data } = useQuery<TimeSeriesData, TimeSeriesVars>(
     COUNTRIES,
     {
@@ -54,7 +49,7 @@ export const CovidDataProvider: React.FC<{}> = ({ children }) => {
   useEffect(() => {
     if (data) {
       const convertedData = convertCountryArrayToObject(data.countries, "name");
-      console.log("data changed", convertedData);
+
       const updated = updatePercentiles(
         dataJSON,
         f => convertedData[f.properties.name],
@@ -69,7 +64,6 @@ export const CovidDataProvider: React.FC<{}> = ({ children }) => {
       value={{
         loading,
         error,
-        data,
         sourceData,
         activeFilter,
         setActiveFilter

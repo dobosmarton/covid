@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export default styled.div`
+  position: relative;
   background-color: ${({ theme: { colors } }) => colors.white};
   padding: 12px;
   border-radius: 4px;

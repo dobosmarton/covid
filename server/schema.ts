@@ -29,10 +29,8 @@ const schema = gql`
     lt: String
   }
   type Query {
-    results(countries: [String], date: DateInput): [Result]
-    result(country: String!, date: String): Result
+    result(country: String!, date: DateInput): [Result]
     countries(names: [String]): [Country]
-    country(name: String): Country
   }
 `;
 

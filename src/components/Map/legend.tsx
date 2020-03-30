@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import styled from "styled-components";
-import Card from "../card";
+import Card from "../Cards/card";
+import { Row } from "../Layout/row";
 
 const LegendPanel = styled(Card)`
   position: absolute;
@@ -11,12 +12,6 @@ const LegendPanel = styled(Card)`
     font-weight: 300;
     font-size: 0.8em;
   }
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 `;
 
 const LegendDot = styled.div`
