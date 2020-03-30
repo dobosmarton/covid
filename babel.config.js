@@ -1,8 +1,8 @@
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
 
   const presets = [
-    ['next/babel', { 'preset-env': { useBuiltIns: 'usage' }, 'transform-runtime': {} }],
+    ['next/babel', { 'preset-env': { useBuiltIns: 'usage', corejs: '3.0.0' }, 'transform-runtime': {} }],
     ['@babel/preset-typescript', { isTSX: true, allExtensions: true }],
   ];
 

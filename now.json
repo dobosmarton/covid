@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "public": true,
+  "scope": "martondobos",
+  "alias": ["https://www.covidinspector.com"],
+
+  "build": {
+    "env": {
+      "MAPBOX_TOKEN": "@mapbox_token",
+      "EMAIL_ADDRESS": "@email_address",
+      "WEB_PAGE": "@web_page",
+      "GITHUB_PAGE": "@github_page",
+      "ANALYTICS_ID": "@analytics_id"
+    }
+  }
+}

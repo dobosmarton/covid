@@ -1,14 +1,9 @@
 import { ApolloServer, makeExecutableSchema } from 'apollo-server-micro';
-import getConfig from 'next/config';
 import Cors from 'micro-cors';
 import fetch from 'isomorphic-unfetch';
-import path from 'path';
 import typeDefs from './schema';
 
-import { processCSVFile } from './helpers';
 import resolvers from './resolvers';
-
-const { serverRuntimeConfig } = getConfig();
 
 const cors = Cors({
   allowMethods: ['GET', 'POST', 'OPTIONS'],
@@ -41,7 +36,16 @@ const apolloServer = new ApolloServer({
         return countryMapData;
       }
 
-      countryMapData = await processCSVFile(path.join(serverRuntimeConfig.PROJECT_ROOT, '/assets/countries.csv'));
+      const res = await fetch('https://restcountries.eu/rest/v2/all');
+      const countries = await res.json();
+
+      // console.log('res', res, countries);
+
+      countryMapData = countries.map(country => ({
+        ...country,
+        latitude: country.latlng[0],
+        longitude: country.latlng[1],
+      }));
 
       return countryMapData;
     };
@@ -56,5 +60,7 @@ export const config = {
     bodyParser: false,
   },
 };
+
+console.log('Start server');
 
 export default cors((req, res) => (req.method === 'OPTIONS' ? res.end() : handler(req, res)));

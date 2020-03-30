@@ -58,7 +58,14 @@ const resolvers = {
       const country = {
         name: countryName,
         results: updatedResults,
-        mapData: countryMapData.find(point => point.name === countryName),
+        mapData: countryMapData.find(point => {
+          return (
+            point.name === countryName ||
+            point.nativeName === countryName ||
+            point.alpha2Code === countryName ||
+            point.translations.de === countryName
+          );
+        }),
         mostRecent,
       };
       return [...acc, country];

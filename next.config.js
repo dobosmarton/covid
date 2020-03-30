@@ -28,7 +28,7 @@ const config = {
   env,
   reactStrictMode: true,
   generateInDevMode: true,
-  transformManifest: manifest => ['/'].concat(manifest),
+  transformManifest: (manifest) => ['/'].concat(manifest),
   serverRuntimeConfig: {
     PROJECT_ROOT: __dirname,
   },

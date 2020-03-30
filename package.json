@@ -15,12 +15,11 @@
   "dependencies": {
     "@apollo/client": "^3.0.0-beta.41",
     "apollo-server-micro": "^2.11.0",
-    "csv-parser": "^2.3.2",
+    "core-js": "^3.6.4",
     "d3-array": "^2.4.0",
     "d3-scale": "^3.2.1",
     "date-fns": "^2.11.1",
     "dotenv": "^8.2.0",
-    "fs": "^0.0.1-security",
     "fuse.js": "^5.0.10-beta",
     "isomorphic-unfetch": "^3.0.0",
     "mapbox-gl": "^1.9.0",
