@@ -43,7 +43,9 @@ export default () => {
   return (
     <InputContainer>
       <IoIosSearch />
+
       <Input ref={inputRef} onChange={setSearchText} />
+
       {searchText?.length > 0 ? <ClickableIcon onClick={onClear} /> : null}
     </InputContainer>
   );

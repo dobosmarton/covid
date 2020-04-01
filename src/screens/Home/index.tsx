@@ -1,5 +1,6 @@
-import { useState, useContext, useCallback } from 'react';
+import { useState, useContext, useEffect, useCallback } from 'react';
 import { NextSeo } from 'next-seo';
+
 import { FlyToInterpolator } from 'react-map-gl';
 
 import { CovidDataContext } from '../../context/CovidContext';
@@ -17,12 +18,17 @@ type Props = {};
 
 const Home = () => {
   const [viewport, setViewport] = useState(defaultViewport);
+  const [isPageLoading, setPageLoading] = useState(true);
 
-  const { loading, error, sourceData } = useContext(CovidDataContext);
+  const { error, sourceData } = useContext(CovidDataContext);
+
+  useEffect(() => {
+    setPageLoading(false);
+  }, []);
 
   const onViewportChange = useCallback(
     ({ latitude, longitude }) => {
-      setViewport(view => ({
+      setViewport((view) => ({
         ...view,
         latitude,
         longitude,
@@ -34,7 +40,6 @@ const Home = () => {
     [setViewport]
   );
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
   return (
@@ -47,7 +52,8 @@ const Home = () => {
           description: 'Region distribution of coronavirus confirmed, deaths, recovered and growth rate data.',
         }}
       />
-      <Header />
+      {!isPageLoading && <Header />}
+
       <MapView viewport={viewport} sourceData={sourceData} onViewportChange={setViewport} />
       <Footer onViewportChange={onViewportChange} />
     </>

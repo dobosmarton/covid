@@ -41,12 +41,12 @@ export default () => {
           <SectionLabel>Resources</SectionLabel>
 
           <span>World Health Organization</span>
-          <a href="https://www.who.int/health-topics/coronavirus" target="_blank">
+          <a href="https://www.who.int/health-topics/coronavirus" target="_blank" rel="noopener noreferrer">
             https://www.who.int/health-topics/coronavirus
           </a>
 
           <span>JSON time-series of coronavirus cases</span>
-          <a href="https://github.com/pomber/covid19" target="_blank">
+          <a href="https://github.com/pomber/covid19" target="_blank" rel="noopener noreferrer">
             https://github.com/pomber/covid19
           </a>
         </Content>

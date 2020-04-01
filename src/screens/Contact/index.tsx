@@ -20,12 +20,12 @@ export default () => {
           <a href={`mailto:${process.env.EMAIL_ADDRESS}`}>{process.env.EMAIL_ADDRESS}</a>
 
           <span>Check out my website</span>
-          <a href={process.env.WEB_PAGE} target="_blank">
+          <a href={process.env.WEB_PAGE} target="_blank" rel="noopener noreferrer">
             {process.env.WEB_PAGE}
           </a>
 
           <span>Source of the page</span>
-          <a href={process.env.GITHUB_PAGE} target="_blank">
+          <a href={process.env.GITHUB_PAGE} target="_blank" rel="noopener noreferrer">
             {process.env.GITHUB_PAGE}
           </a>
         </Content>

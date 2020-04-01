@@ -26,6 +26,10 @@ export default class App extends NextApp {
         <Head>
           <link rel="icon" type="image/png" sizes="32x32" href="/static/virus-32.png" />
           <title>Coronavirus data map</title>
+          <meta
+            name="Description"
+            content="Region distribution of coronavirus confirmed, deaths, recovered and growth rate data."
+          />
           <meta name="google" content="notranslate" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
         </Head>

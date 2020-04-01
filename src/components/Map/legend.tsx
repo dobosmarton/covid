@@ -41,17 +41,11 @@ export default ({ stops, quantiles }: Props) => {
     [quantiles]
   );
 
-  const renderLegendKeys = useCallback(
-    (stop, i) => {
-      const range = getRange(i);
-      return (
-        <Row key={i}>
-          <LegendDot style={{ backgroundColor: stop[1] }} />
-          <span>{range}</span>
-        </Row>
-      );
-    },
-    [quantiles]
+  const renderLegendKeys = (stop, i) => (
+    <Row key={i}>
+      <LegendDot style={{ backgroundColor: stop[1] }} />
+      <span>{getRange(i)}</span>
+    </Row>
   );
 
   return <LegendPanel>{stops.map(renderLegendKeys)}</LegendPanel>;

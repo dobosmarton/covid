@@ -60,16 +60,16 @@ export default ({ withSearch = true }) => {
   return (
     <Header>
       <Row>
-        <Link href="/">
+        <Link href="/" prefetch={false}>
           <Title>COVID-19</Title>
         </Link>
         {withSearch && <SearchInput />}
       </Row>
       <Row>
-        <Link href="/info">
+        <Link href="/info" prefetch={false}>
           <LinkText>Info</LinkText>
         </Link>
-        <Link href="/contact">
+        <Link href="/contact" prefetch={false}>
           <LinkText>Contact</LinkText>
         </Link>
       </Row>
