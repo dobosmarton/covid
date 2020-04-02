@@ -51,8 +51,8 @@ const Title = styled.div`
 `;
 
 const Label = styled.div`
-  font-size: 0.6em;
-  line-height: 0.8em;
+  font-size: 0.7em;
+  line-height: 1.2em;
   font-weight: 400;
   color: ${({ theme: { colors } }) => colors.grey};
 `;
