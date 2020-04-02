@@ -2,7 +2,6 @@
   "version": 2,
   "public": true,
   "scope": "martondobos",
-  "alias": ["https://www.covidinspector.com"],
 
   "build": {
     "env": {
