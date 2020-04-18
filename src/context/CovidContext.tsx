@@ -9,6 +9,7 @@ interface ContextProps {
   readonly loading: boolean;
   readonly error: ApolloError | null;
   readonly sourceData: {
+    filter: string;
     features: any[];
     quantiles?: number[];
   } | null;
@@ -40,7 +41,7 @@ export const CovidDataProvider: React.FC<{}> = ({ children }) => {
     if (data) {
       const convertedData = convertCountryArrayToObject(data.countries, 'name');
 
-      const updated = updatePercentiles(dataJSON, f => convertedData[f.properties.name], activeFilter);
+      const updated = updatePercentiles(dataJSON, (f) => convertedData[f.properties.name], activeFilter);
       setSourceData(updated);
     }
   }, [data, activeFilter]);

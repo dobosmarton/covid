@@ -14,6 +14,7 @@ type ViewPort = {
 type Props = {
   viewport: ViewPort;
   sourceData: {
+    filter: string;
     features: any[];
     quantiles?: number[];
   };
@@ -21,6 +22,8 @@ type Props = {
 };
 
 const Map = ({ viewport, sourceData, onViewportChange }: Props) => {
+  console.log('sourceData', sourceData);
+
   return (
     <MapGL
       {...viewport}
@@ -34,7 +37,11 @@ const Map = ({ viewport, sourceData, onViewportChange }: Props) => {
         <Layer {...dataLayer} />
       </Source>
       <Switcher />
-      <Legend quantiles={sourceData?.quantiles} stops={dataLayer.paint['fill-color'].stops} />
+      <Legend
+        filter={sourceData?.filter}
+        quantiles={sourceData?.quantiles}
+        stops={dataLayer.paint['fill-color'].stops}
+      />
     </MapGL>
   );
 };

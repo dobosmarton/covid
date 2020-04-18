@@ -41,5 +41,6 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 1.5em;
     font-family: Nunito Sans;
     font-weight: 400;
+    margin: 0;
   }
 `;
