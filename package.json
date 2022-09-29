@@ -18,7 +18,7 @@
     "apollo-server-micro": "^2.11.0",
     "core-js": "^3.6.4",
     "d3-array": "^2.4.0",
-    "d3-scale": "^3.2.1",
+    "d3-scale": "^4.0.2",
     "date-fns": "^2.11.1",
     "dotenv": "^8.2.0",
     "fuse.js": "^5.0.10-beta",
@@ -37,7 +37,7 @@
     "react-icons": "^3.9.0",
     "react-map-gl": "^5.2.3",
     "react-modal": "^3.11.2",
-    "recharts": "^1.8.5",
+    "recharts": "^2.1.14",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
